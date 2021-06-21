@@ -1,12 +1,18 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!-- stub preference used to detect availability in hooked packages -->
+    <Preference
+        app:defaultValue="true"
+        app:isPreferenceVisible="false"
+        app:key="available" />
+
     <Preference app:summary="@string/summary_introduction" />
 
     <SwitchPreferenceCompat
+        app:defaultValue="@bool/defaultDisableCameraManager"
         app:disableDependentsState="true"
         app:key="disableCameraManager"
         app:summary="@string/summary_disableCameraManager"
-        app:defaultValue="@bool/defaultDisableCameraManager"
         app:title="@string/title_disableCameraManager" />
 
     <PreferenceCategory
@@ -19,13 +25,13 @@
             app:summary="@string/summary_disableFrontFacing"
             app:title="@string/title_disableFrontFacing" />
         <CheckBoxPreference
-            app:key="disableBackFacing"
             app:defaultValue="@bool/defaultDisableBackFacing"
+            app:key="disableBackFacing"
             app:summary="@string/summary_disableBackFacing"
             app:title="@string/title_disableBackFacing" />
         <CheckBoxPreference
-            app:key="disableExternal"
             app:defaultValue="@bool/defaultDisableExternal"
+            app:key="disableExternal"
             app:summary="@string/summary_disableExternal"
             app:title="@string/title_disableExternal" />
     </PreferenceCategory>
