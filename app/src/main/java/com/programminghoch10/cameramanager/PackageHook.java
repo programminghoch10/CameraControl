@@ -7,6 +7,7 @@ public class PackageHook implements IXposedHookLoadPackage {
 	@Override
 	public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
 		if (lpparam.packageName.equals("android")) return;
-		DisableHook.hook(lpparam);
+		//DisableHook.hook(lpparam);
+		CameraManagerHook.hook(lpparam);
 	}
 }
