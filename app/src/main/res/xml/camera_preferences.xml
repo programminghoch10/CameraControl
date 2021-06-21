@@ -1,0 +1,49 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Preference app:summary="@string/summary_introduction" />
+
+    <SwitchPreferenceCompat
+        app:disableDependentsState="true"
+        app:key="disableCameraManager"
+        app:summary="@string/summary_disableCameraManager"
+        app:defaultValue="@bool/defaultDisableCameraManager"
+        app:title="@string/title_disableCameraManager" />
+
+    <PreferenceCategory
+        app:dependency="disableCameraManager"
+        app:key="category_facing"
+        app:title="@string/title_category_facing">
+        <CheckBoxPreference
+            app:defaultValue="@bool/defaultDisableFrontFacing"
+            app:key="disableFrontFacing"
+            app:summary="@string/summary_disableFrontFacing"
+            app:title="@string/title_disableFrontFacing" />
+        <CheckBoxPreference
+            app:key="disableBackFacing"
+            app:defaultValue="@bool/defaultDisableBackFacing"
+            app:summary="@string/summary_disableBackFacing"
+            app:title="@string/title_disableBackFacing" />
+        <CheckBoxPreference
+            app:key="disableExternal"
+            app:defaultValue="@bool/defaultDisableExternal"
+            app:summary="@string/summary_disableExternal"
+            app:title="@string/title_disableExternal" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:dependency="disableCameraManager"
+        app:key="category_blocking"
+        app:title="@string/title_category_blocking">
+        <SwitchPreferenceCompat
+            app:defaultValue="@bool/defaultHideCameras"
+            app:key="blockList"
+            app:summary="@string/summary_blockList"
+            app:title="@string/title_blockList" />
+        <SwitchPreferenceCompat
+            app:defaultValue="@bool/defaultBlockAccess"
+            app:key="blockAccess"
+            app:summary="@string/summary_blockAccess"
+            app:title="@string/title_blockAccess" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

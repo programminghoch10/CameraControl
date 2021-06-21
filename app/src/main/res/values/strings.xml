@@ -1,4 +1,29 @@
 <resources>
     <string name="app_name">CameraManager</string>
     <string name="xposed_description">Manage your Camera on a system level</string>
+    <string name="title_activity_settings">Camera Manager Settings</string>
+    <string name="summary_introduction">Welcome to Camera Manager Settings.\n
+        This configuration screen will allow you to manage access to the cameras.\n
+        Please mind, that the settings will only be applied on those apps,
+        which this module has been activated for
+        and that a restart may be necessary to apply changes.</string>
+
+    <string name="title_disableCameraManager">Disable Camera Manager completely</string>
+    <string name="summary_disableCameraManager">Disables Camera Manager completely for all selected apps. \
+        Those apps will not have access to any camera anymore.</string>
+    <string name="title_category_facing">Faces</string>
+    <string name="title_disableFrontFacing">Front</string>
+    <string name="summary_disableFrontFacing">Disable front facing cameras</string>
+    <string name="title_disableBackFacing">Back</string>
+    <string name="summary_disableBackFacing">Disable back facing cameras</string>
+    <string name="title_disableExternal">External</string>
+    <string name="summary_disableExternal">Disable external cameras</string>
+    <string name="title_category_blocking">Blocking</string>
+    <string name="title_blockList">Hide Cameras</string>
+    <string name="summary_blockList">Hide Cameras by removing them from the list of available cameras when the app requests one.</string>
+    <string name="title_blockAccess">Block Camera Access</string>
+    <string name="summary_blockAccess">Block access to this camera when the app attempts to open it.
+        An app will usually not try to access cameras it does not know about, so hiding a camera should be enough.
+        You can still use this for additional security, but it\'s not recommended to block access without hiding the cameras.</string>
+
 </resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="defaultDisableCameraManager">false</bool>
+    <bool name="defaultDisableFrontFacing">true</bool>
+    <bool name="defaultDisableBackFacing">false</bool>
+    <bool name="defaultDisableExternal">false</bool>
+    <bool name="defaultHideCameras">true</bool>
+    <bool name="defaultBlockAccess">false</bool>
+</resources>
