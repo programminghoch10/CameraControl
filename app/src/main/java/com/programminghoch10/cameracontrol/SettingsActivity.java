@@ -15,7 +15,10 @@ public class SettingsActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//FIXME: app crash when xposed not active
+		ActionBar actionBar = getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
 		Log.d("CameraManager", "onCreate: xposedactive=" + xposedActive);
 		if (!xposedActive) {
 			setContentView(R.layout.settings_activity_noxposed);
@@ -27,10 +30,6 @@ public class SettingsActivity extends AppCompatActivity {
 					.beginTransaction()
 					.replace(R.id.settings, new SettingsFragment())
 					.commit();
-		}
-		ActionBar actionBar = getSupportActionBar();
-		if (actionBar != null) {
-			actionBar.setDisplayHomeAsUpEnabled(true);
 		}
 	}
 	
