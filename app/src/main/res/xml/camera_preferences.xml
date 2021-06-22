@@ -2,6 +2,7 @@
 
     <Preference
         app:key="introduction"
+        app:selectable="false"
         app:summary="@string/summary_introduction" />
 
     <SwitchPreferenceCompat

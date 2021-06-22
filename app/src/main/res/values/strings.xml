@@ -6,11 +6,12 @@
         This configuration screen will allow you to manage access to the cameras.\n
         Please mind, that the settings will only be applied on those apps,
         which this module has been activated for
-        and that a restart may be necessary to apply changes.</string>
+        and that a restart may be necessary to apply changes. \n
+        A quick and easy way to apply changes is to force close the apps in their app info.</string>
 
-    <string name="title_disableCameraManager">Disable Camera Manager completely</string>
-    <string name="summary_disableCameraManager">Disables Camera Manager completely for all selected apps. \
-        Those apps will not have access to any camera anymore.</string>
+    <string name="title_disableCameraManager">Disable Cameras completely</string>
+    <string name="summary_disableCameraManager">Disables Cameras completely for all selected apps. \
+        Those apps will not have access to any camera anymore and may fail when trying to open them.</string>
     <string name="title_category_facing">Faces</string>
     <string name="title_disableFrontFacing">Front</string>
     <string name="summary_disableFrontFacing">Disable front facing cameras</string>
