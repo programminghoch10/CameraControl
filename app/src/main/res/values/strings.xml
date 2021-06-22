@@ -8,6 +8,9 @@
         which this module has been activated for
         and that a restart may be necessary to apply changes. \n
         A quick and easy way to apply changes is to force close the apps in their app info.</string>
+    <string name="xposed_inactive">XPosed is not available. \n
+        Please ensure it\'s working and is activated for this module. \n
+        If you think this is wrong, force close the app in the app settings or restart your device.</string>
 
     <string name="title_disableCameraManager">Disable Cameras completely</string>
     <string name="summary_disableCameraManager">Disables Cameras completely for all selected apps. \

@@ -17,6 +17,10 @@ public class SettingsActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		//FIXME: app crash when xposed not active
 		Log.d("CameraManager", "onCreate: xposedactive=" + xposedActive);
+		if (!xposedActive) {
+			setContentView(R.layout.settings_activity_noxposed);
+			return;
+		}
 		setContentView(R.layout.settings_activity);
 		if (savedInstanceState == null) {
 			getSupportFragmentManager()
