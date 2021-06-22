@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CameraControl</string>
+    <string name="app_name" translatable="false">CameraControl</string>
     <string name="xposed_description">Next level camera management</string>
     <string name="title_activity_settings">CameraControl Settings</string>
     <string name="summary_introduction">Welcome to CameraControl Settings.\n
