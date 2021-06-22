@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">CameraManager</string>
-    <string name="xposed_description">Manage your Camera on a system level</string>
+    <string name="xposed_description">Next level camera management</string>
     <string name="title_activity_settings">Camera Manager Settings</string>
     <string name="summary_introduction">Welcome to Camera Manager Settings.\n
         This configuration screen will allow you to manage access to the cameras.\n
@@ -22,7 +22,7 @@
     <string name="title_blockList">Hide Cameras</string>
     <string name="summary_blockList">Hide Cameras by removing them from the list of available cameras when the app requests one.</string>
     <string name="title_blockAccess">Block Camera Access</string>
-    <string name="summary_blockAccess">Block access to this camera when the app attempts to open it.
+    <string name="summary_blockAccess">Block access to a camera when the app attempts to open it.
         An app will usually not try to access cameras it does not know about, so hiding a camera should be enough.
         You can still use this for additional security, but it\'s not recommended to block access without hiding the cameras.</string>
 
