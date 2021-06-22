@@ -32,7 +32,11 @@ This was developed and tested on LineageOS 17.1, but should work on any android 
 
 Now configure away!
 
-_Small intel: The configure_
+___Small intel:__ The configure activity is not accessible from the launcher, 
+because LSPosed does not let modules hide their own launcher icons by default anymore. 
+Defining a settings activity is an easy way to provide an accessible configuration interface, 
+without forcing yet another launcher icon into the list.
+One does not have to open the menu often anyways._
 
 ### What it looks like
 ![Screenshot](screenshot.png)
