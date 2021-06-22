@@ -1,12 +1,8 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- stub preference used to detect availability in hooked packages -->
     <Preference
-        app:defaultValue="true"
-        app:isPreferenceVisible="false"
-        app:key="available" />
-
-    <Preference app:summary="@string/summary_introduction" />
+        app:key="introduction"
+        app:summary="@string/summary_introduction" />
 
     <SwitchPreferenceCompat
         app:defaultValue="@bool/defaultDisableCameraManager"

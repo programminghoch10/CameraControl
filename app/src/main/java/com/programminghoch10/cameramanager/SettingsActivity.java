@@ -1,21 +1,21 @@
 package com.programminghoch10.cameramanager;
 
-import android.annotation.SuppressLint;
-import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.SwitchPreferenceCompat;
 
 public class SettingsActivity extends AppCompatActivity {
+	
+	private static boolean xposedActive = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//FIXME: app crash when xposed not active
+		Log.d("CameraManager", "onCreate: xposedactive=" + xposedActive);
 		setContentView(R.layout.settings_activity);
 		if (savedInstanceState == null) {
 			getSupportFragmentManager()
@@ -27,15 +27,16 @@ public class SettingsActivity extends AppCompatActivity {
 		if (actionBar != null) {
 			actionBar.setDisplayHomeAsUpEnabled(true);
 		}
-		
 	}
 	
 	public static class SettingsFragment extends PreferenceFragmentCompat {
 		@Override
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-			setPreferencesFromResource(R.xml.camera_preferences, rootKey);
+			getPreferenceManager().setSharedPreferencesMode(MODE_WORLD_READABLE);
 			getPreferenceManager().setSharedPreferencesName("camera");
+			setPreferencesFromResource(R.xml.camera_preferences, rootKey);
 		}
 		
 	}
+	
 }
