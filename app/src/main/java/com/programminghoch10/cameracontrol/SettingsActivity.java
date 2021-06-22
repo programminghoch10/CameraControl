@@ -1,5 +1,6 @@
 package com.programminghoch10.cameracontrol;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -30,6 +31,7 @@ public class SettingsActivity extends AppCompatActivity {
 	}
 	
 	public static class SettingsFragment extends PreferenceFragmentCompat {
+		@SuppressLint("WorldReadableFiles")
 		@Override
 		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 			getPreferenceManager().setSharedPreferencesMode(MODE_WORLD_READABLE);

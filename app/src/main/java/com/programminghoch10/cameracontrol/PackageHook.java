@@ -12,7 +12,7 @@ public class PackageHook implements IXposedHookLoadPackage {
 		XSharedPreferences sharedPreferences = new XSharedPreferences(BuildConfig.APPLICATION_ID, "camera");
 		if (!sharedPreferences.getFile().canRead()) sharedPreferences = null;
 		if (sharedPreferences == null) {
-			Log.e("CameraManager", "getSharedPreferences: failed to load SharedPreferences");
+			Log.e("CameraControl", "getSharedPreferences: failed to load SharedPreferences");
 		}
 		return sharedPreferences;
 	}
@@ -25,7 +25,7 @@ public class PackageHook implements IXposedHookLoadPackage {
 			return;
 		}
 		
-		//Log.d("CameraManager", "handleLoadPackage: package="+lpparam.packageName);
+		//Log.d("CameraControl", "handleLoadPackage: package="+lpparam.packageName);
 		//XposedBridge.log("handleLoadPackage: package="+lpparam.packageName);
 		
 		XSharedPreferences sharedPreferences = getSharedPreferences();
