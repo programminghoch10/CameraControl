@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">CameraManager</string>
+    <string name="app_name">CameraControl</string>
     <string name="xposed_description">Next level camera management</string>
-    <string name="title_activity_settings">Camera Manager Settings</string>
-    <string name="summary_introduction">Welcome to Camera Manager Settings.\n
+    <string name="title_activity_settings">CameraControl Settings</string>
+    <string name="summary_introduction">Welcome to CameraControl Settings.\n
         This configuration screen will allow you to manage access to the cameras.\n
         Please mind, that the settings will only be applied on those apps,
         which this module has been activated for

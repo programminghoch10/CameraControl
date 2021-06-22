@@ -1,4 +1,4 @@
-package com.programminghoch10.cameramanager;
+package com.programminghoch10.cameracontrol;
 
 import android.content.SharedPreferences;
 import android.hardware.camera2.CameraAccessException;
@@ -13,7 +13,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;

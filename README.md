@@ -1,7 +1,7 @@
-# CameraManager
+# CameraControl
 Next level camera management.
 
-CameraManager lets you manage access to your cameras depending on which side of the phone they face.
+CameraControl lets you manage access to your cameras depending on which side of the phone they face.
 
 Why? Because I hate it when Snapchat opens up and forces me to see my own depression. But completely disabling all the cameras for Snapchat would render the whole app useless.
 
@@ -16,19 +16,19 @@ This was developed and tested on LineageOS 17.1, but should work on any android 
 
 - Route 1:
     - Go back to the module list
-    - Long press on `CameraManager` and select App Info
+    - Long press on `CameraControl` and select App Info
     - On the bottom, click on `Advanced`
     - Click on `Additional settings in the app`
 - Route 2:
     - Go into device settings
     - Click on apps
     - Somehow tell the device to show all apps
-    - Select `CameraManager`
+    - Select `CameraControl`
     - On the bottom, click `Advanced`
     - Click on `Additional settings in the app`
 - Route 3:
     - Open up an ADB shell
-    - Run command `am start-activity com.programminghoch10.cameramanager/.SettingsActivity`
+    - Run command `am start-activity com.programminghoch10.cameracontrol/.SettingsActivity`
 
 Now configure away!
 

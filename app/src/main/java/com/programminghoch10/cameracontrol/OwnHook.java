@@ -1,6 +1,4 @@
-package com.programminghoch10.cameramanager;
-
-import android.annotation.SuppressLint;
+package com.programminghoch10.cameracontrol;
 
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;

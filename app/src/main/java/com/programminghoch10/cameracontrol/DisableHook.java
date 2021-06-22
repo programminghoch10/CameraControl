@@ -1,4 +1,4 @@
-package com.programminghoch10.cameramanager;
+package com.programminghoch10.cameracontrol;
 
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;

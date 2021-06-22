@@ -1,4 +1,4 @@
-package com.programminghoch10.cameramanager;
+package com.programminghoch10.cameracontrol;
 
 import android.os.Bundle;
 import android.util.Log;
