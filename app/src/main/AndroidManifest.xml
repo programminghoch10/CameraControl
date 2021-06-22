@@ -3,7 +3,7 @@
     package="com.programminghoch10.cameramanager">
 
     <application
-        android:icon="@android:drawable/ic_menu_camera"
+        android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight">
