@@ -5,7 +5,7 @@ CameraControl lets you manage access to your cameras depending on which side of 
 
 Why? Because I hate it when Snapchat opens up and forces me to see my own depression. But completely disabling all the cameras for Snapchat would render the whole app useless.
 
-This was developed and tested on LineageOS 17.1, but should work on any android >= 10.
+This was developed and tested on `LineageOS 17.1`, but should work on any android `>= 8.1`.
 
 ### How to install:
 

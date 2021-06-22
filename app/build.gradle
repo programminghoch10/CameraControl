@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.programminghoch10.cameracontrol"
-        minSdkVersion 29
+        minSdkVersion 27
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
