@@ -6,4 +6,5 @@
     <bool name="defaultDisableExternal">false</bool>
     <bool name="defaultHideCameras">true</bool>
     <bool name="defaultBlockAccess">false</bool>
+    <bool name="defaultBlockFlash">false</bool>
 </resources>

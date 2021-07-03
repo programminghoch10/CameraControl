@@ -29,4 +29,9 @@
     <string name="summary_blockAccess">Verhindere den Kamerazugriff wenn die App versucht auf die Kamera zuzugreifen.
         Eine App wird normalerweise nicht versuchen auf Kameras zuzugreifen die sie nicht kennt, die Kameras zu verstecken sollte also reichen.
         Sie können dies für zusätzliche Sicherheit benutzen, aber es wird nicht empfohlen den Kamerazugriff zu verhindern ohne die Kameras zu verstecken.</string>
+    <string name="title_category_flash">Blitz</string>
+    <string name="title_blockFlash">Blitz verstecken</string>
+    <string name="summary_blockFlash">Versuche die Existenz des Blitzes zu verstecken.
+        Dies verhindert nicht, dass eine App den Blitz benutzt und funktioniert eventuell nicht.</string>
+    
 </resources>

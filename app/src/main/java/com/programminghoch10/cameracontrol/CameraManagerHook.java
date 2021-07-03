@@ -5,14 +5,17 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.os.Handler;
+import android.util.Log;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.Executor;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -22,7 +25,7 @@ public class CameraManagerHook {
 	static void disableHook(XC_LoadPackage.LoadPackageParam lpparam) {
 		XposedBridge.log("Disabling CameraManager completely");
 		XposedHelpers.setStaticBooleanField(
-				XposedHelpers.findClass( CameraManager.class.getName() + "$CameraManagerGlobal", lpparam.classLoader),
+				XposedHelpers.findClass(CameraManager.class.getName() + "$CameraManagerGlobal", lpparam.classLoader),
 				"sCameraServiceDisabled", true
 		);
 	}
@@ -62,6 +65,47 @@ public class CameraManagerHook {
 						param.setThrowable(new CameraAccessException(CameraAccessException.CAMERA_DISABLED));
 				}
 			});
+		}
+		if (cameraPreferences.blockFlash) {
+			XposedBridge.log("Hooking setTorchMode");
+			XposedHelpers.findAndHookMethod(CameraManager.class, "setTorchMode", String.class, boolean.class, XC_MethodReplacement.DO_NOTHING);
+			XposedBridge.log("Hooking get");
+			XposedHelpers.findAndHookMethod(CameraCharacteristics.class, "get", CameraCharacteristics.Key.class, new XC_MethodHook() {
+				@Override
+				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+					CameraCharacteristics.Key<?> key = (CameraCharacteristics.Key<?>) param.args[0];
+					Log.d("CameraControl", "beforeHookedMethod: get key " + key.getName());
+					if (key.getName().equals(CameraCharacteristics.FLASH_INFO_AVAILABLE.getName())) {
+						Log.d("CameraControl", "beforeHookedMethod: PREVENT FLASH");
+						param.setResult(false);
+					}
+				}
+				
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					CameraCharacteristics.Key<?> key = (CameraCharacteristics.Key<?>) param.args[0];
+					if (key.getName().equals(CameraCharacteristics.CONTROL_AE_AVAILABLE_MODES.getName())) {
+						Log.d("CameraControl", "afterHookedMethod: filtering flash");
+						int[] methodResult = (int[]) param.getResult();
+						int[] filteredResult =
+								Arrays.stream(methodResult).filter(u -> {
+									switch (u) {
+										case CameraCharacteristics.CONTROL_AE_MODE_ON_AUTO_FLASH:
+										case CameraCharacteristics.CONTROL_AE_MODE_ON_ALWAYS_FLASH:
+										case CameraCharacteristics.CONTROL_AE_MODE_ON_AUTO_FLASH_REDEYE:
+										case CameraCharacteristics.CONTROL_AE_MODE_ON_EXTERNAL_FLASH:
+											return false;
+										default:
+											return true;
+									}
+								}).toArray();
+						param.setResult(filteredResult);
+					}
+				}
+			});
+			XposedBridge.log("Hooking registerTorchCallback");
+			XposedHelpers.findAndHookMethod(CameraManager.class, "registerTorchCallback",
+					CameraManager.TorchCallback.class, Executor.class, XC_MethodReplacement.DO_NOTHING);
 		}
 	}
 	

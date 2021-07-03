@@ -29,5 +29,8 @@
     <string name="summary_blockAccess">Block access to a camera when the app attempts to open it.
         An app will usually not try to access cameras it does not know about, so hiding a camera should be enough.
         You can still use this for additional security, but it\'s not recommended to block access without hiding the cameras.</string>
+    <string name="title_category_flash">Flash</string>
+    <string name="title_blockFlash">Hide Flash</string>
+    <string name="summary_blockFlash">Try to hide the existence of the flash. This does not prevent the app from using the flash and might not work at all.</string>
 
 </resources>

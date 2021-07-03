@@ -49,4 +49,14 @@
             app:title="@string/title_blockAccess" />
     </PreferenceCategory>
 
+    <PreferenceCategory
+        app:key="category_flash"
+        app:title="@string/title_category_flash">
+        <SwitchPreferenceCompat
+            app:defaultValue="@bool/defaultBlockFlash"
+            app:key="blockFlash"
+            app:summary="@string/summary_blockFlash"
+            app:title="@string/title_blockFlash" />
+    </PreferenceCategory>
+
 </PreferenceScreen>

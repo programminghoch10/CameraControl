@@ -48,6 +48,7 @@ public class PackageHook implements IXposedHookLoadPackage {
 		boolean disableExternal = true;
 		boolean blockList = true;
 		boolean blockAccess = true;
+		boolean blockFlash = true;
 		
 		CameraPreferences(SharedPreferences sharedPreferences) {
 			disableFrontFacing = sharedPreferences.getBoolean("disableFrontFacing", true);
@@ -55,6 +56,7 @@ public class PackageHook implements IXposedHookLoadPackage {
 			disableExternal = sharedPreferences.getBoolean("disableExternal", true);
 			blockList = sharedPreferences.getBoolean("blockList", true);
 			blockAccess = sharedPreferences.getBoolean("blockAccess", true);
+			blockFlash = sharedPreferences.getBoolean("blockFlash", true);
 		}
 		
 		CameraPreferences() {
@@ -66,6 +68,7 @@ public class PackageHook implements IXposedHookLoadPackage {
 			disableExternal = state;
 			blockList = state;
 			blockAccess = state;
+			blockFlash = state;
 		}
 		
 		void disableAll() {
