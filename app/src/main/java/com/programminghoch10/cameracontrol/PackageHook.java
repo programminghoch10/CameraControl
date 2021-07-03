@@ -35,8 +35,10 @@ public class PackageHook implements IXposedHookLoadPackage {
 		
 		if (sharedPreferences.getBoolean("disableCameraManager", false)) {
 			CameraManagerHook.disableHook(lpparam);
+			CameraHook.disableHook(lpparam);
 		} else {
 			CameraManagerHook.hook(lpparam, cameraPreferences);
+			CameraHook.hook(lpparam, cameraPreferences);
 		}
 	}
 	
@@ -56,6 +58,26 @@ public class PackageHook implements IXposedHookLoadPackage {
 		}
 		
 		CameraPreferences() {
+		}
+		
+		void setAll(boolean state) {
+			disableFrontFacing = state;
+			disableBackFacing = state;
+			disableExternal = state;
+			blockList = state;
+			blockAccess = state;
+		}
+		
+		void disableAll() {
+			setAll(true);
+		}
+		
+		void enableAll() {
+			setAll(false);
+		}
+		
+		boolean blockLegacy() {
+			return blockList || blockAccess;
 		}
 	}
 }
