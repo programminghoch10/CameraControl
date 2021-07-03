@@ -1,5 +1,6 @@
 package com.programminghoch10.cameracontrol;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
@@ -30,11 +31,31 @@ public class PackageHook implements IXposedHookLoadPackage {
 		
 		XSharedPreferences sharedPreferences = getSharedPreferences();
 		if (sharedPreferences == null) return;
+		CameraPreferences cameraPreferences = new CameraPreferences(sharedPreferences);
 		
 		if (sharedPreferences.getBoolean("disableCameraManager", false)) {
-			DisableHook.hook(lpparam);
+			CameraManagerHook.disableHook(lpparam);
 		} else {
-			CameraManagerHook.hook(lpparam, sharedPreferences);
+			CameraManagerHook.hook(lpparam, cameraPreferences);
+		}
+	}
+	
+	public static class CameraPreferences {
+		boolean disableFrontFacing = true;
+		boolean disableBackFacing = true;
+		boolean disableExternal = true;
+		boolean blockList = true;
+		boolean blockAccess = true;
+		
+		CameraPreferences(SharedPreferences sharedPreferences) {
+			disableFrontFacing = sharedPreferences.getBoolean("disableFrontFacing", true);
+			disableBackFacing = sharedPreferences.getBoolean("disableBackFacing", true);
+			disableExternal = sharedPreferences.getBoolean("disableExternal", true);
+			blockList = sharedPreferences.getBoolean("blockList", true);
+			blockAccess = sharedPreferences.getBoolean("blockAccess", true);
+		}
+		
+		CameraPreferences() {
 		}
 	}
 }
