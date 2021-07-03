@@ -2,6 +2,7 @@ package com.programminghoch10.cameracontrol;
 
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.os.Handler;
 
@@ -21,7 +22,7 @@ public class CameraManagerHook {
 	static void disableHook(XC_LoadPackage.LoadPackageParam lpparam) {
 		XposedBridge.log("Disabling CameraManager completely");
 		XposedHelpers.setStaticBooleanField(
-				XposedHelpers.findClass("android.hardware.camera2.CameraManager$CameraManagerGlobal", lpparam.classLoader),
+				XposedHelpers.findClass( CameraManager.class.getName() + "$CameraManagerGlobal", lpparam.classLoader),
 				"sCameraServiceDisabled", true
 		);
 	}
@@ -29,7 +30,7 @@ public class CameraManagerHook {
 	static void hook(XC_LoadPackage.LoadPackageParam lpparam, PackageHook.CameraPreferences cameraPreferences) {
 		if (cameraPreferences.blockList) {
 			XposedBridge.log("Hooking getCameraIdList");
-			XposedHelpers.findAndHookMethod("android.hardware.camera2.CameraManager", lpparam.classLoader, "getCameraIdList", new XC_MethodHook() {
+			XposedHelpers.findAndHookMethod(CameraManager.class, "getCameraIdList", new XC_MethodHook() {
 				@Override
 				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 					String[] ids = (String[]) param.getResult();
@@ -49,8 +50,8 @@ public class CameraManagerHook {
 		}
 		if (cameraPreferences.blockAccess) {
 			XposedBridge.log("Hooking openCamera");
-			Method openCamera = XposedHelpers.findMethodExact("android.hardware.camera2.CameraManager", lpparam.classLoader, "openCamera",
-					String.class, "android.hardware.camera2.CameraDevice$StateCallback", Handler.class);
+			Method openCamera = XposedHelpers.findMethodExact(CameraManager.class, "openCamera",
+					String.class, CameraDevice.StateCallback.class, Handler.class);
 			XposedBridge.hookMethod(openCamera, new XC_MethodHook() {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
