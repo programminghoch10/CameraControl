@@ -7,4 +7,5 @@
     <bool name="defaultHideCameras">true</bool>
     <bool name="defaultBlockAccess">false</bool>
     <bool name="defaultBlockFlash">false</bool>
+    <bool name="defaultSwapSide">false</bool>
 </resources>

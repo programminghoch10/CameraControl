@@ -49,6 +49,13 @@
             app:title="@string/title_blockAccess" />
     </PreferenceCategory>
 
+    <SwitchPreferenceCompat
+        app:dependency="disableCameraManager"
+        app:key="swapSide"
+        app:title="@string/title_swapSide"
+        app:summary="@string/summary_swapSide"
+        app:defaultValue="@bool/defaultSwapSide" />
+
     <PreferenceCategory
         app:key="category_flash"
         app:title="@string/title_category_flash">

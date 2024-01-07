@@ -33,5 +33,6 @@
     <string name="title_blockFlash">Blitz verstecken</string>
     <string name="summary_blockFlash">Versuche die Existenz des Blitzes zu verstecken.
         Dies verhindert nicht, dass eine App den Blitz benutzt und funktioniert eventuell nicht.</string>
-    
+    <string name="title_swapSide">Cameraseite vertauschen</string>
+    <string name="summary_swapSide">Vertauscht die Cameraseite von vorne nach hinten und hinten nach vorne.</string>
 </resources>

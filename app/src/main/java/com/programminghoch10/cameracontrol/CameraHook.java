@@ -21,7 +21,7 @@ public class CameraHook {
 	}
 	
 	static void hook(XC_LoadPackage.LoadPackageParam lpparam, PackageHook.CameraPreferences cameraPreferences) {
-		if (cameraPreferences.blockLegacy()) {
+		if (cameraPreferences.blockLegacy() || cameraPreferences.swapSide) {
 			XposedBridge.log("Hooking getNumberOfCameras");
 			XposedHelpers.findAndHookMethod(Camera.class, "getNumberOfCameras", new XC_MethodHook() {
 				@Override
@@ -54,7 +54,8 @@ public class CameraHook {
 			XposedHelpers.findAndHookMethod(Camera.class, "open", new XC_MethodHook() {
 				@Override
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-					if (cameraPreferences.disableBackFacing) param.setResult(null);
+					if (cameraPreferences.swapSide ? cameraPreferences.disableFrontFacing : cameraPreferences.disableBackFacing)
+						param.setResult(null);
 				}
 			});
 		}
@@ -81,6 +82,17 @@ public class CameraHook {
 			Camera.getCameraInfo(i, cameraInfo);
 			boolean disableCamera = shouldDisableCamera(cameraInfo, cameraPreferences);
 			map.put(i, disableCamera ? null : i);
+		}
+		if (cameraPreferences.swapSide) {
+			if (map.containsKey(0)) map.put(0, 1);
+			if (map.containsKey(1)) map.put(1, 0);
+			for (int i = 2; i < realCameraCount; i++) {
+				// since the old camera API cant handle multiple front cams,
+				// just remove all other back cameras to ensure the side swap succeeds
+				// at the cost of making other back cameras unavailable
+				// who uses the old camera api anyways?
+				map.remove(i);
+			}
 		}
 		return map;
 	}

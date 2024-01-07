@@ -32,5 +32,6 @@
     <string name="title_category_flash">Flash</string>
     <string name="title_blockFlash">Hide Flash</string>
     <string name="summary_blockFlash">Try to hide the existence of the flash. This does not prevent the app from using the flash and might not work at all.</string>
-
+    <string name="title_swapSide">Swap Camera Side</string>
+    <string name="summary_swapSide">Change each cameras direction from back to front and front to back.</string>
 </resources>

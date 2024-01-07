@@ -107,6 +107,19 @@ public class CameraManagerHook {
 			XposedHelpers.findAndHookMethod(CameraManager.class, "registerTorchCallback",
 					CameraManager.TorchCallback.class, Executor.class, XC_MethodReplacement.DO_NOTHING);
 		}
+		if (cameraPreferences.swapSide) {
+			XposedBridge.log("Hooking getCameraCharacteristics");
+			XposedBridge.hookAllMethods(CameraCharacteristics.class, "get", new XC_MethodHook() {
+				@Override
+				protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					Object key = param.args[0];
+					if (!CameraCharacteristics.LENS_FACING.equals(key)) return;
+					Integer facing = (Integer) param.getResult();
+					if (facing == CameraCharacteristics.LENS_FACING_FRONT) param.setResult((Integer) CameraCharacteristics.LENS_FACING_BACK);
+					if (facing == CameraCharacteristics.LENS_FACING_BACK) param.setResult((Integer) CameraCharacteristics.LENS_FACING_FRONT);
+				}
+			});
+		}
 	}
 	
 	private static boolean disableCamera(CameraCharacteristics characteristics, PackageHook.CameraPreferences cameraPreferences) {
