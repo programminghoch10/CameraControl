@@ -3,14 +3,14 @@ plugins {
 }
 
 android {
-    compileSdk 30
+    compileSdk 34
 
     namespace "com.programminghoch10.cameracontrol"
 
     defaultConfig {
         applicationId "com.programminghoch10.cameracontrol"
         minSdkVersion 27
-        targetSdkVersion 30
+        targetSdkVersion 34
         versionCode 2
         versionName "1.1"
     }
