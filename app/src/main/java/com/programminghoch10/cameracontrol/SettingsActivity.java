@@ -1,21 +1,21 @@
 package com.programminghoch10.cameracontrol;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
+import android.app.Activity;
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.util.Log;
+import android.view.View;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceFragmentCompat;
-
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends Activity {
 	
 	private static boolean xposedActive = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		ActionBar actionBar = getSupportActionBar();
+		ActionBar actionBar = getActionBar();
 		if (actionBar != null) {
 			actionBar.setDisplayHomeAsUpEnabled(true);
 		}
@@ -26,22 +26,22 @@ public class SettingsActivity extends AppCompatActivity {
 		}
 		setContentView(R.layout.settings_activity);
 		if (savedInstanceState == null) {
-			getSupportFragmentManager()
+			getFragmentManager()
 					.beginTransaction()
 					.replace(R.id.settings, new SettingsFragment())
 					.commit();
 		}
 	}
 	
-	public static class SettingsFragment extends PreferenceFragmentCompat {
+	public static class SettingsFragment extends PreferenceFragment {
 		@SuppressLint("WorldReadableFiles")
 		@Override
-		public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+		public void onViewCreated(View view, Bundle savedInstanceState) {
+			super.onViewCreated(view, savedInstanceState);
 			getPreferenceManager().setSharedPreferencesMode(MODE_WORLD_READABLE);
 			getPreferenceManager().setSharedPreferencesName("camera");
-			setPreferencesFromResource(R.xml.camera_preferences, rootKey);
+			addPreferencesFromResource(R.xml.camera_preferences);
 		}
-		
 	}
 	
 }

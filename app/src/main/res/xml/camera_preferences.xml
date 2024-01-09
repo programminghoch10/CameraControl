@@ -1,69 +1,69 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Preference
-        app:key="introduction"
-        app:selectable="false"
-        app:summary="@string/summary_introduction" />
+        android:key="introduction"
+        android:selectable="false"
+        android:summary="@string/summary_introduction" />
 
-    <SwitchPreferenceCompat
-        app:defaultValue="@bool/defaultDisableCameraManager"
-        app:disableDependentsState="true"
-        app:key="disableCameraManager"
-        app:summary="@string/summary_disableCameraManager"
-        app:title="@string/title_disableCameraManager" />
+    <SwitchPreference
+        android:defaultValue="@bool/defaultDisableCameraManager"
+        android:disableDependentsState="true"
+        android:key="disableCameraManager"
+        android:summary="@string/summary_disableCameraManager"
+        android:title="@string/title_disableCameraManager" />
 
     <PreferenceCategory
-        app:dependency="disableCameraManager"
-        app:key="category_facing"
-        app:title="@string/title_category_facing">
+        android:dependency="disableCameraManager"
+        android:key="category_facing"
+        android:title="@string/title_category_facing">
         <CheckBoxPreference
-            app:defaultValue="@bool/defaultDisableFrontFacing"
-            app:key="disableFrontFacing"
-            app:summary="@string/summary_disableFrontFacing"
-            app:title="@string/title_disableFrontFacing" />
+            android:defaultValue="@bool/defaultDisableFrontFacing"
+            android:key="disableFrontFacing"
+            android:summary="@string/summary_disableFrontFacing"
+            android:title="@string/title_disableFrontFacing" />
         <CheckBoxPreference
-            app:defaultValue="@bool/defaultDisableBackFacing"
-            app:key="disableBackFacing"
-            app:summary="@string/summary_disableBackFacing"
-            app:title="@string/title_disableBackFacing" />
+            android:defaultValue="@bool/defaultDisableBackFacing"
+            android:key="disableBackFacing"
+            android:summary="@string/summary_disableBackFacing"
+            android:title="@string/title_disableBackFacing" />
         <CheckBoxPreference
-            app:defaultValue="@bool/defaultDisableExternal"
-            app:key="disableExternal"
-            app:summary="@string/summary_disableExternal"
-            app:title="@string/title_disableExternal" />
+            android:defaultValue="@bool/defaultDisableExternal"
+            android:key="disableExternal"
+            android:summary="@string/summary_disableExternal"
+            android:title="@string/title_disableExternal" />
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:dependency="disableCameraManager"
-        app:key="category_blocking"
-        app:title="@string/title_category_blocking">
-        <SwitchPreferenceCompat
-            app:defaultValue="@bool/defaultHideCameras"
-            app:key="blockList"
-            app:summary="@string/summary_blockList"
-            app:title="@string/title_blockList" />
-        <SwitchPreferenceCompat
-            app:defaultValue="@bool/defaultBlockAccess"
-            app:key="blockAccess"
-            app:summary="@string/summary_blockAccess"
-            app:title="@string/title_blockAccess" />
+        android:dependency="disableCameraManager"
+        android:key="category_blocking"
+        android:title="@string/title_category_blocking">
+        <SwitchPreference
+            android:defaultValue="@bool/defaultHideCameras"
+            android:key="blockList"
+            android:summary="@string/summary_blockList"
+            android:title="@string/title_blockList" />
+        <SwitchPreference
+            android:defaultValue="@bool/defaultBlockAccess"
+            android:key="blockAccess"
+            android:summary="@string/summary_blockAccess"
+            android:title="@string/title_blockAccess" />
     </PreferenceCategory>
 
-    <SwitchPreferenceCompat
-        app:dependency="disableCameraManager"
-        app:key="swapSide"
-        app:title="@string/title_swapSide"
-        app:summary="@string/summary_swapSide"
-        app:defaultValue="@bool/defaultSwapSide" />
+    <SwitchPreference
+        android:dependency="disableCameraManager"
+        android:key="swapSide"
+        android:title="@string/title_swapSide"
+        android:summary="@string/summary_swapSide"
+        android:defaultValue="@bool/defaultSwapSide" />
 
     <PreferenceCategory
-        app:key="category_flash"
-        app:title="@string/title_category_flash">
-        <SwitchPreferenceCompat
-            app:defaultValue="@bool/defaultBlockFlash"
-            app:key="blockFlash"
-            app:summary="@string/summary_blockFlash"
-            app:title="@string/title_blockFlash" />
+        android:key="category_flash"
+        android:title="@string/title_category_flash">
+        <SwitchPreference
+            android:defaultValue="@bool/defaultBlockFlash"
+            android:key="blockFlash"
+            android:summary="@string/summary_blockFlash"
+            android:title="@string/title_blockFlash" />
     </PreferenceCategory>
 
 </PreferenceScreen>
