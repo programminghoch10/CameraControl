@@ -81,8 +81,5 @@ public class PackageHook implements IXposedHookLoadPackage {
 			setAll(false);
 		}
 		
-		boolean blockLegacy() {
-			return blockList || blockAccess;
-		}
 	}
 }

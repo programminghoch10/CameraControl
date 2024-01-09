@@ -7,11 +7,13 @@ import android.hardware.camera2.CameraManager;
 import android.os.Handler;
 import android.util.Log;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.Executor;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -41,9 +43,10 @@ public class CameraManagerHook {
 					List<String> cameras = new ArrayList<>(Arrays.asList(ids));
 					Iterator<String> iterator = cameras.iterator();
 					while (iterator.hasNext()) {
-						String id = iterator.next();
-						CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics(id);
-						if (disableCamera(characteristics, cameraPreferences))
+						String cameraId = iterator.next();
+						//CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics(id);
+						CameraCharacteristics characteristics = (CameraCharacteristics) XposedBridge.invokeOriginalMethod(XposedHelpers.findMethodExact(CameraManager.class, "getCameraCharacteristics", String.class), cameraManager, new Object[]{cameraId});
+						if (shouldDisableCamera(characteristics, cameraPreferences))
 							iterator.remove();
 					}
 					String[] camerasModified = cameras.toArray(new String[0]);
@@ -60,8 +63,9 @@ public class CameraManagerHook {
 				protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 					String cameraId = (String) param.args[0];
 					CameraManager cameraManager = (CameraManager) param.thisObject;
-					CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics(cameraId);
-					if (disableCamera(characteristics, cameraPreferences))
+					//CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics(cameraId);
+					CameraCharacteristics characteristics = (CameraCharacteristics) XposedBridge.invokeOriginalMethod(XposedHelpers.findMethodExact(CameraManager.class, "getCameraCharacteristics", int.class), cameraManager, new Object[]{cameraId});
+					if (shouldDisableCamera(characteristics, cameraPreferences))
 						param.setThrowable(new CameraAccessException(CameraAccessException.CAMERA_DISABLED));
 				}
 			});
@@ -115,22 +119,35 @@ public class CameraManagerHook {
 					Object key = param.args[0];
 					if (!CameraCharacteristics.LENS_FACING.equals(key)) return;
 					Integer facing = (Integer) param.getResult();
-					if (facing == CameraCharacteristics.LENS_FACING_FRONT) param.setResult((Integer) CameraCharacteristics.LENS_FACING_BACK);
-					if (facing == CameraCharacteristics.LENS_FACING_BACK) param.setResult((Integer) CameraCharacteristics.LENS_FACING_FRONT);
+					param.setResult((Integer) swapSide(facing));
 				}
 			});
 		}
 	}
-	
-	private static boolean disableCamera(CameraCharacteristics characteristics, PackageHook.CameraPreferences cameraPreferences) {
+
+	private static int swapSide(int facing) {
+		if (facing == CameraCharacteristics.LENS_FACING_FRONT)
+			return CameraCharacteristics.LENS_FACING_BACK;
+		if (facing == CameraCharacteristics.LENS_FACING_BACK)
+			return CameraCharacteristics.LENS_FACING_FRONT;
+		return facing;
+	}
+	private static int swapSide(int facing, PackageHook.CameraPreferences cameraPreferences) {
+		if (!cameraPreferences.swapSide)
+			return facing;
+		return swapSide(facing);
+	}
+
+	private static boolean shouldDisableCamera(CameraCharacteristics characteristics, PackageHook.CameraPreferences cameraPreferences) {
+		XposedBridge.log("should disable camera");
 		if (cameraPreferences.disableFrontFacing
-				&& characteristics.get(CameraCharacteristics.LENS_FACING).equals(CameraCharacteristics.LENS_FACING_FRONT))
+				&& Objects.equals(characteristics.get(CameraCharacteristics.LENS_FACING), swapSide(CameraCharacteristics.LENS_FACING_FRONT, cameraPreferences)))
 			return true;
 		if (cameraPreferences.disableBackFacing
-				&& characteristics.get(CameraCharacteristics.LENS_FACING).equals(CameraCharacteristics.LENS_FACING_BACK))
+				&& Objects.equals(characteristics.get(CameraCharacteristics.LENS_FACING), swapSide(CameraCharacteristics.LENS_FACING_BACK, cameraPreferences)))
 			return true;
 		if (cameraPreferences.disableExternal
-				&& characteristics.get(CameraCharacteristics.LENS_FACING).equals(CameraCharacteristics.LENS_FACING_EXTERNAL))
+				&& Objects.equals(characteristics.get(CameraCharacteristics.LENS_FACING), swapSide(CameraCharacteristics.LENS_FACING_EXTERNAL, cameraPreferences)))
 			return true;
 		return false;
 	}
